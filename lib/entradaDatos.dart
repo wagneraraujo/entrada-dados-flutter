@@ -9,47 +9,67 @@ class CampoTexto extends StatefulWidget {
 
 class _CampoTextoState extends State<CampoTexto> {
   //classe que controla o que foi digitado
-  TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _controllerAlcool = TextEditingController();
+  TextEditingController _controllerGasolina = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Entrada de dados"),
-      ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: TextField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: "Digite um texto"),
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.green,
+        appBar: AppBar(
+          title: Text("Gasolina ou Alcool"),
+        ),
+        body: Container(
+            child: SingleChildScrollView(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Image.asset(
+                  "images/alcool.jpg",
+                  height: 200,
+                ),
               ),
-
-              //retorna de imadiato o que está sendo digitado
-              onChanged: (String texto) {
-                print("valor digitado:" + texto);
-              },
-
-              onSubmitted: (String dadoEnviado) {
-                print("Dado enviado: " + dadoEnviado);
-              },
-
-              //controlador ininciado pelo textcontroller
-              controller: _textEditingController,
-            ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(bottom: 10),
+                child: Text(
+                  "Saiba qual o melhor valor para abastecimento",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24, color: Colors.blueGrey),
+                ),
+              ),
+              TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: "Preço Alcool ex: 2.52"),
+                style: TextStyle(fontSize: 18),
+                controller: _controllerAlcool,
+              ),
+              TextField(
+                keyboardType: TextInputType.number,
+                decoration:
+                    InputDecoration(labelText: "Preço Gasolina ex: 4.52"),
+                style: TextStyle(fontSize: 18),
+                controller: _controllerGasolina,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: RaisedButton(
+                  child: Text(
+                    "Calcular Agora",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.deepOrange,
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text("Resultado"),
+              )
+            ],
           ),
-          RaisedButton(
-            child: Text("Salvar dados"),
-            color: Colors.indigoAccent,
-            onPressed: () {
-              print("Dado pelo textEditting: " + _textEditingController.text);
-            },
-          )
-        ],
-      ),
-    );
+        )));
   }
 }
